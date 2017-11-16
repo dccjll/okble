@@ -1,19 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.yunds.bluetoothle.MainActivity">
-
-    <TextView
-        android:layout_width="wrap_content"
+    android:orientation="vertical">
+    <include
+        android:id="@+id/titleLayout"
+        layout="@layout/item_title"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/listRv"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-</android.support.constraint.ConstraintLayout>
+        android:padding="@dimen/item_common_padding_10_dimen"/>
+</LinearLayout>
+<!--<android.support.constraint.ConstraintLayout-->
+    <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent">-->
+    <!--<include-->
+        <!--android:id="@+id/titleLayout"-->
+        <!--layout="@layout/item_title"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"/>-->
+    <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:id="@+id/listRv"-->
+        <!--android:layout_width="368dp"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_marginTop="@dimen/item_common_margin_5_dimen"-->
+        <!--android:layout_marginBottom="@dimen/item_common_margin_5_dimen"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/titleLayout"/>-->
+<!--</android.support.constraint.ConstraintLayout>-->

@@ -1,3 +1,12 @@
 <resources>
-    <string name="app_name">bluetoothle</string>
+    <string name="app_name">onlyble</string>
+    <string name="idlock_8065">IDLOCK_8065</string>
+    <string name="c3_fa_58_31_80_65">C3:FA:58:31:80:65</string>
+    <string name="_80">-80</string>
+    <string name="broadcast_package_data">49 72 30 BE 98 46 23 52 CA 5C 4E 11 FF 5E 17 0B 43 4C B1 A7 7E 4E 58 9D</string>
+    <string name="title">标题</string>
+    <string name="scan">扫描</string>
+    <string name="scan_failure">扫描失败</string>
+    <string name="have_not_data_yet">还没有数据</string>
+    <string name="scan_need_location_permission">扫描需要位置权限</string>
 </resources>

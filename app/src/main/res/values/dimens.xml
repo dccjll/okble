@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="device_name_dimen">17sp</dimen>
+    <dimen name="device_mac_dimen">13sp</dimen>
+    <dimen name="item_common_margin_10_dimen">10dp</dimen>
+    <dimen name="item_common_padding_10_dimen">10dp</dimen>
+    <dimen name="item_common_margin_5_dimen">5dp</dimen>
+    <dimen name="title_dimen">17sp</dimen>
+    <dimen name="device_rssi_dimen">13sp</dimen>
+    <dimen name="broadcast_package_data_dimen">13sp</dimen>
+</resources>

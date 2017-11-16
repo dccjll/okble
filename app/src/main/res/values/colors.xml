@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#FF730B08</color>
+    <color name="colorPrimaryDark">#FF730B08</color>
+    <color name="colorAccent">#FF730B08</color>
+
+    <!--背景颜色-->
+    <color name="backgroundColor">#efeff4</color>
+
+    <color name="titleColor">@android:color/black</color>
+
+    <color name="deviceNameColor">@android:color/black</color>
+    <color name="deviceMacColor">@android:color/black</color>
+    <color name="deviceRssiColor">#FF0D1CC1</color>
+    <color name="broadcastPackageDataColor">@android:color/black</color>
+
 </resources>
