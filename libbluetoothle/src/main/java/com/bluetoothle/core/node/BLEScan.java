@@ -187,8 +187,8 @@ public class BLEScan {
             foundDevice = true;
             scanControl(false);
         }
-        bleManage.setBluetoothDevice(device);
-        bleManage.setTargetDeviceAddress(device.getAddress());
+//        bleManage.setBluetoothDevice(device);
+//        bleManage.setTargetDeviceAddress(device.getAddress());
         if (bleManage.getListenterObject() instanceof OnBLEScanListener) {
             bleManage.getBleResponseManager().onFoundDevice(device, rssi, scanRecord);
             return;
