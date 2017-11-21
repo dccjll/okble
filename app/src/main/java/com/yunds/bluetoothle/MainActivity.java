@@ -112,6 +112,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Scan
     @Override
     protected void onResume() {
         super.onResume();
+
         scanDevice.startScan();
     }
 
