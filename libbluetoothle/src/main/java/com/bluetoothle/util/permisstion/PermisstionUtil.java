@@ -20,6 +20,8 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 
+import com.bluetoothle.R;
+import com.bluetoothle.base.BLESDKLibrary;
 import com.bluetoothle.base.PhoneConfigManager;
 import com.bluetoothle.util.SystemUtil;
 import com.bluetoothle.util.log.LogUtil;
@@ -89,14 +91,14 @@ public class PermisstionUtil {
      * 请求读写sd卡权限
      */
     public static void requestStoragePermisstion(@NonNull final Context context, final OnPermissionResult onPermissionResult) {
-        requestPermissions(context, STORAGE, STORAGE_CODE, "需要读写sd卡权限", onPermissionResult);
+        requestPermissions(context, STORAGE, STORAGE_CODE, BLESDKLibrary.context.getString(R.string.need_sdcard_permission), onPermissionResult);
     }
 
     /**
      * 请求拍照权限
      */
     public static void requestCamaraPermission(@NonNull final Context context, final OnPermissionResult onPermissionResult) {
-        requestPermissions(context, CAMERA, CAMERA_CODE, "需要拍照权限", onPermissionResult);
+        requestPermissions(context, CAMERA, CAMERA_CODE, BLESDKLibrary.context.getString(R.string.need_camera_permission), onPermissionResult);
     }
 
     /**
@@ -272,7 +274,7 @@ public class PermisstionUtil {
                     list.add(permission);
                 }
             } else {
-                throw new IllegalArgumentException("context 只能是Activity或Fragment");
+                throw new IllegalArgumentException("context exception");
             }
         }
         return list.toArray(new String[list.size()]);
@@ -346,13 +348,13 @@ public class PermisstionUtil {
 //        },true);
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setMessage(onPermissionResult.explainMsg);
-        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(BLESDKLibrary.context.getText(R.string.confirm), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 invokeRequestPermissions(context, onPermissionResult);
             }
         });
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(BLESDKLibrary.context.getText(R.string.cancel), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 onPermissionResult.grantResults = getPermissionsResults(context, onPermissionResult.permissions);

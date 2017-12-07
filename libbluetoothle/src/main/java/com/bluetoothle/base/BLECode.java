@@ -16,6 +16,7 @@ public class BLECode {
 
     public final static SparseArray<Integer> codeMap = new SparseArray<>();//消息码集合
 
+    public final static int scan_device_nearby = 10000;//扫描附件的设备
     public final static int not_support_ble = -10000;//手机不支持蓝牙低功耗
     public final static int can_not_get_ble_manager = -10001;//无法获取蓝牙管理服务
     public final static int can_not_get_ble_adapter = -10002;//无法获取蓝牙适配器
@@ -58,8 +59,12 @@ public class BLECode {
     public final static int ble_timeout = -10038;//蓝牙超时
     public final static int disconnected_on_timeout_for_disconnect = -10039;//已超时断开
     public final static int on_ble_uuid_list_validate_failure = -10040;//通讯uuid组校验失败
+    public final static int scan_error = -10041;//扫描异常
+    public final static int on_fireware_update_failure = -10042;//固件更新失败
+    public final static int please_check_fireware_address = -10043;//请检查固件地址
 
     static {
+        codeMap.put(scan_device_nearby, R.string.scan_device_nearby);
         codeMap.put(not_support_ble, R.string.not_support_ble);
         codeMap.put(can_not_get_ble_manager, R.string.can_not_get_ble_manager);
         codeMap.put(can_not_get_ble_adapter, R.string.can_not_get_ble_adapter);
@@ -102,6 +107,9 @@ public class BLECode {
         codeMap.put(ble_timeout, R.string.ble_timeout);
         codeMap.put(disconnected_on_timeout_for_disconnect, R.string.disconnected_on_timeout_for_disconnect);
         codeMap.put(on_ble_uuid_list_validate_failure, R.string.on_ble_uuid_list_validate_failure);
+        codeMap.put(scan_error, R.string.scan_error);
+        codeMap.put(on_fireware_update_failure, R.string.fireware_update_failure);
+        codeMap.put(please_check_fireware_address, R.string.please_check_fireware_address);
     }
 
     /**

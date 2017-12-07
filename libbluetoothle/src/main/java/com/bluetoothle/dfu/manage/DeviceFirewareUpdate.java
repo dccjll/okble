@@ -8,6 +8,7 @@ import android.util.Log;
 import android.webkit.MimeTypeMap;
 
 import com.bluetoothle.R;
+import com.bluetoothle.base.BLECode;
 import com.bluetoothle.base.BLESDKLibrary;
 import com.bluetoothle.core.listener.OnBLEScanListener;
 import com.bluetoothle.core.manage.BLEManage;
@@ -67,7 +68,7 @@ public class DeviceFirewareUpdate {
 
         @Override
         public void onScanFail(final int errorCode) {
-            handleError(deviceMac, Log.ERROR, "扫描失败");
+            handleError(deviceMac, Log.ERROR, BLECode.getBLECodeMessage(BLESDKLibrary.context, BLECode.scan_error));
         }
     };
 
@@ -148,14 +149,14 @@ public class DeviceFirewareUpdate {
         @Override
         public void onError(String deviceAddress, int error, int errorType, String message) {
             if (The_Num_To_Attempt ++ < The_Max_Num_To_Attempt) {
-                LogUtil.i(TAG, "第" + The_Num_To_Attempt + "次固件更新失败," + error + ",尝试第" + (The_Num_To_Attempt + 1) + "次更新...");
+                LogUtil.i(TAG, "第" + The_Num_To_Attempt + "次固件更新失败," + message + ",尝试第" + (The_Num_To_Attempt + 1) + "次更新...");
                 bleManage.setTargetDeviceAddress(newTargetMacAddress);
                 startScan();
                 return;
             }
-            LogUtil.i(TAG, "第" + The_Num_To_Attempt + "次固件更新失败,已尝试最大重试次数" + The_Max_Num_To_Attempt + ",不再尝试，固件更新失败");
+            LogUtil.i(TAG, "第" + The_Num_To_Attempt + "次固件更新失败," + message + ",已尝试最大重试次数" + The_Max_Num_To_Attempt + ",不再尝试，固件更新失败");
             DfuServiceListenerHelper.unregisterProgressListener(BLESDKLibrary.context, dfuProgressListener);
-            handleError(deviceAddress, Log.ERROR, message);
+            handleError(deviceAddress, Log.ERROR, BLECode.getBLECodeMessage(BLESDKLibrary.context, BLECode.on_fireware_update_failure));
         }
     };
 

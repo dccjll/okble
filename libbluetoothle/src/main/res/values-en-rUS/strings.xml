@@ -1,0 +1,7 @@
+<resources>
+    <string name="network_error">Network exception</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+    <string name="need_camera_permission">operating need camera permission</string>
+    <string name="need_sdcard_permission">operating need sdcard permission</string>
+</resources>

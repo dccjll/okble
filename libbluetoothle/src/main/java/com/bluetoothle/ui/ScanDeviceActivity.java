@@ -35,8 +35,6 @@ import java.util.Map;
  * deviceNameStartWith(String) 扫描设备的过滤器，匹配设备名称开始的字符串<br>
  */
 public class ScanDeviceActivity extends Activity {
-
-    private static final String TAG = "ScanDeviceActivity";
     private boolean longScanFlag;//长扫描标记
     private int bleDeviceType;//设备类型
     private String deviceNameStartWith;//设备名称开始的信息

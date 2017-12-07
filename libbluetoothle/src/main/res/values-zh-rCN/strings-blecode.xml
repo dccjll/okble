@@ -1,4 +1,5 @@
 <resources>
+    <string name="scan_device_nearby">扫描附近的设备</string>
     <string name="not_support_ble">手机不支持蓝牙低功耗</string>
     <string name="can_not_get_ble_manager">无法获取蓝牙管理服务</string>
     <string name="can_not_get_ble_adapter">无法获取蓝牙适配器</string>
@@ -42,4 +43,7 @@
     <string name="ble_timeout">蓝牙超时</string>
     <string name="disconnected_on_timeout_for_disconnect">已超时断开</string>
     <string name="on_ble_uuid_list_validate_failure">通讯uuid组校验失败</string>
+    <string name="scan_error">扫描异常</string>
+    <string name="fireware_update_failure">固件更新失败</string>
+    <string name="please_check_fireware_address">请检查固件地址</string>
 </resources>
