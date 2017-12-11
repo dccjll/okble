@@ -45,7 +45,7 @@ public class ScanDeviceImpl implements ScanDevice {
         @Override
         public void onScanFail(int errorCode) {
             stopScan();
-            scanDeviceView.onScanFailure(BLECode.getBLECodeMessage(BLESDKLibrary.context, errorCode));
+            scanDeviceView.onScanFailure(BLECode.getBLECodeMessage(errorCode));
         }
     };
 

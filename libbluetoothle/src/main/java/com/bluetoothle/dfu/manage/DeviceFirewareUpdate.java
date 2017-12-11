@@ -68,7 +68,7 @@ public class DeviceFirewareUpdate {
 
         @Override
         public void onScanFail(final int errorCode) {
-            handleError(deviceMac, Log.ERROR, BLECode.getBLECodeMessage(BLESDKLibrary.context, BLECode.scan_error));
+            handleError(deviceMac, Log.ERROR, BLECode.getBLECodeMessage(BLECode.scan_error));
         }
     };
 
@@ -156,7 +156,7 @@ public class DeviceFirewareUpdate {
             }
             LogUtil.i(TAG, "第" + The_Num_To_Attempt + "次固件更新失败," + message + ",已尝试最大重试次数" + The_Max_Num_To_Attempt + ",不再尝试，固件更新失败");
             DfuServiceListenerHelper.unregisterProgressListener(BLESDKLibrary.context, dfuProgressListener);
-            handleError(deviceAddress, Log.ERROR, BLECode.getBLECodeMessage(BLESDKLibrary.context, BLECode.on_fireware_update_failure));
+            handleError(deviceAddress, Log.ERROR, BLECode.getBLECodeMessage(BLECode.on_fireware_update_failure));
         }
     };
 

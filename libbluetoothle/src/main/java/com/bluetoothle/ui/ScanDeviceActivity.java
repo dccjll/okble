@@ -128,7 +128,7 @@ public class ScanDeviceActivity extends Activity {
 
             @Override
             public void onScanFail(int errorCode) {
-                ToastUtil.showToastLong(BLECode.getBLECodeMessage(BLESDKLibrary.context, errorCode));
+                ToastUtil.showToastLong(BLECode.getBLECodeMessage(errorCode));
             }
         }).startScan();
     }

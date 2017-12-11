@@ -1,10 +1,12 @@
 package com.bluetoothle.base;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.Log;
 import android.util.SparseArray;
 
 import com.bluetoothle.R;
+import com.bluetoothle.util.log.LogUtil;
 
 /**
  * 作者：dccjll<br>
@@ -13,9 +15,10 @@ import com.bluetoothle.R;
  */
 
 public class BLECode {
-
+    private static final String TAG = "BLECode";
     public final static SparseArray<Integer> codeMap = new SparseArray<>();//消息码集合
 
+    public final static int ble_error = -9999;//手机蓝牙异常
     public final static int scan_device_nearby = 10000;//扫描附件的设备
     public final static int not_support_ble = -10000;//手机不支持蓝牙低功耗
     public final static int can_not_get_ble_manager = -10001;//无法获取蓝牙管理服务
@@ -64,6 +67,7 @@ public class BLECode {
     public final static int please_check_fireware_address = -10043;//请检查固件地址
 
     static {
+        codeMap.put(ble_error, R.string.ble_error);
         codeMap.put(scan_device_nearby, R.string.scan_device_nearby);
         codeMap.put(not_support_ble, R.string.not_support_ble);
         codeMap.put(can_not_get_ble_manager, R.string.can_not_get_ble_manager);
@@ -115,14 +119,61 @@ public class BLECode {
     /**
      * 获取消息码对应的描述信息
      */
-    public static String getBLECodeMessage(Context context, int bleCode) {
-        return context.getString(codeMap.get(bleCode));
+    public static String getBLECodeMessage(int bleCode) {
+        String bleString = BLESDKLibrary.context.getString(codeMap.get(bleCode));
+        try {
+            String[] bleStringArr = bleString.split("\\|");
+            bleString = bleStringArr[0];
+            int bleLogLevel = getBLECodeMessageLevel(bleCode);
+            LogUtil.i(TAG, "Befor pass,getBLECodeMessage, msg=" + bleString + ",level=" + getBLECodeMessageLevelMessage(bleCode));
+            if (bleLogLevel > Log.INFO && bleCode != ble_error) {
+                bleString = BLESDKLibrary.context.getString(R.string.ble_error);
+            }
+            LogUtil.i(TAG, "After pass,getBLECodeMessage, msg=" + bleString + ",level=" + getBLECodeMessageLevelMessage(bleCode));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return bleString;
     }
 
     /**
      * 获取消息码对应的描述信息等级
      */
-    public static int getBLECodeMessageLevel(Context context, int bleCode) {
-        return Log.INFO;
+    public static int getBLECodeMessageLevel(int bleCode) {
+        int bleLevel = Log.INFO;
+        try {
+            String bleLogLevelString = getBLECodeMessageLevelMessage(bleCode);
+            if ("VERBOSE".equalsIgnoreCase(bleLogLevelString)) {
+                bleLevel = Log.VERBOSE;
+            } else if ("DEBUG".equalsIgnoreCase(bleLogLevelString)) {
+                bleLevel = Log.DEBUG;
+            } else if ("INFO".equalsIgnoreCase(bleLogLevelString)) {
+                bleLevel = Log.INFO;
+            } else if ("WARN".equalsIgnoreCase(bleLogLevelString)) {
+                bleLevel = Log.WARN;
+            } else if ("ERROR".equalsIgnoreCase(bleLogLevelString)) {
+                bleLevel = Log.ERROR;
+            } else if ("ASSERT".equalsIgnoreCase(bleLogLevelString)) {
+                bleLevel = Log.ASSERT;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return bleLevel;
+    }
+
+    /**
+     * 获取消息码对应的描述信息等级
+     */
+    private static String getBLECodeMessageLevelMessage(int bleCode) {
+        String bleLevelMessage = "INFO";
+        try {
+            String bleString = BLESDKLibrary.context.getString(codeMap.get(bleCode));
+            String[] bleStringArr = bleString.split("\\|");
+            bleLevelMessage = bleStringArr[1];
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return bleLevelMessage;
     }
 }

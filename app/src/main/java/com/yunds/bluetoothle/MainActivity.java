@@ -12,10 +12,12 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bluetoothle.base.BLECode;
 import com.bluetoothle.base.BLESDKLibrary;
 import com.bluetoothle.util.ByteUtil;
 import com.bluetoothle.util.ScreenUtils;
 import com.bluetoothle.util.ToastUtil;
+import com.bluetoothle.util.log.LogUtil;
 import com.bluetoothle.util.permisstion.PermisstionUtil;
 import com.yunds.bluetoothle.adapter.CommonRVAdapter;
 import com.yunds.bluetoothle.entry.BluetoothDRB;
@@ -28,6 +30,7 @@ import java.util.List;
 @SuppressWarnings("ALL")
 public class MainActivity extends Activity implements View.OnClickListener, ScanDeviceView {
 
+    private static final String TAG = "MainActivity";
     private ImageView scanIv;
     private Animation animation;
     private RecyclerView listRv;
@@ -87,6 +90,10 @@ public class MainActivity extends Activity implements View.OnClickListener, Scan
         initLibrary();
         initPresenter();
         initView();
+        LogUtil.i(TAG, "=============" + BLECode.getBLECodeMessage(BLECode.not_support_ble));
+        LogUtil.i(TAG, "=============" + BLECode.getBLECodeMessage(BLECode.device_connected));
+        LogUtil.i(TAG, "=============" + BLECode.getBLECodeMessage(BLECode.can_not_get_ble_manager));
+        LogUtil.i(TAG, "=============" + BLECode.getBLECodeMessage(BLECode.already_connect_max_count_device_can_not_connect_more));
     }
 
     private void initLibrary() {
