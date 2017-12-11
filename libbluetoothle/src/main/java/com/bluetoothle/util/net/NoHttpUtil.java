@@ -185,7 +185,8 @@ public class NoHttpUtil {
         request.add(postMap);
         request.add(fileKey, new FileBinary(postFile));
         if (url.startsWith("https")) {
-            SSLContextUtil.doHttps(request, context);
+            listener.onFinish(false, null, Log.INFO, "not support https request yet");
+            return;
         }
         mRequestQueue.add(assignWhatValue(), request, new OnResponseListener<String>() {
             @Override
@@ -236,7 +237,8 @@ public class NoHttpUtil {
         }
         DownloadRequest request = NoHttp.createDownloadRequest(url, RequestMethod.GET, fileFolder, filename, true, true);
         if (url.startsWith("https")) {
-            SSLContextUtil.doHttps(request, context);
+            listener.onFailure("not support https request yet", Log.INFO);
+            return;
         }
         mDownloadQueue.add(assignWhatValue(), request, new DownloadListener() {
             @Override
@@ -346,7 +348,8 @@ public class NoHttpUtil {
         request.setHeader("Connection", "close");
         //https加密
         if (url.startsWith("https")) {
-            SSLContextUtil.doHttps(request, context);
+            listener.onFinish(false, null, Log.INFO, "not support https request yet");
+            return;
         }
         // 向请求队列中添加请求
         // what: 当多个请求同时使用同一个OnResponseListener时，用来区分请求，类似Handler中的what

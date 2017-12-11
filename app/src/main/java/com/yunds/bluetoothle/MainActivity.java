@@ -90,10 +90,6 @@ public class MainActivity extends Activity implements View.OnClickListener, Scan
         initLibrary();
         initPresenter();
         initView();
-        LogUtil.i(TAG, "=============" + BLECode.getBLECodeMessage(BLECode.not_support_ble));
-        LogUtil.i(TAG, "=============" + BLECode.getBLECodeMessage(BLECode.device_connected));
-        LogUtil.i(TAG, "=============" + BLECode.getBLECodeMessage(BLECode.can_not_get_ble_manager));
-        LogUtil.i(TAG, "=============" + BLECode.getBLECodeMessage(BLECode.already_connect_max_count_device_can_not_connect_more));
     }
 
     private void initLibrary() {
