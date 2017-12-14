@@ -3,6 +3,6 @@
     <string name="cancel">Cancel</string>
     <string name="need_camera_permission">Operating need camera permission</string>
     <string name="need_sdcard_permission">Operating need sdcard permission</string>
-    <string name="ble_error">Occur ble error</string>
+    <string name="system_error">System error</string>
     <string name="scan_device_nearby">Scan device nearby</string>
 </resources>

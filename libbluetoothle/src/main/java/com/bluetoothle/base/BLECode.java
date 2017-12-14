@@ -53,7 +53,7 @@ public class BLECode {
             int bleLogLevel = getBLECodeMessageLevel(bleCode);
             LogUtil.i(TAG, "Befor pass,getBLECodeMessage, msg=" + bleString + ",level=" + getBLECodeMessageLevelMessage(bleCode));
             if (bleLogLevel > Log.INFO) {
-                bleString = BLESDKLibrary.context.getString(R.string.ble_error);
+                bleString = BLESDKLibrary.context.getString(R.string.system_error);
             }
             LogUtil.i(TAG, "After pass,getBLECodeMessage, msg=" + bleString + ",level=" + getBLECodeMessageLevelMessage(bleCode));
         } catch (Exception e) {
