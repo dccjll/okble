@@ -5,7 +5,6 @@ import android.bluetooth.BluetoothDevice;
 import android.os.Handler;
 import android.text.TextUtils;
 
-import com.bluetoothle.base.BLECode;
 import com.bluetoothle.base.BLEConfig;
 import com.bluetoothle.base.BLESDKLibrary;
 import com.bluetoothle.core.listener.OnBLEScanListener;
@@ -107,15 +106,15 @@ public class BLEScan {
     public void startScan(){
         LogUtil.i(TAG, "准备开始扫描");
         if(BLESDKLibrary.bluetoothAdapter == null){
-            bleManage.handleError(BLECode.can_not_get_ble_adapter);
+            bleManage.handleError(-10002);
             return;
         }
         if (!BLESDKLibrary.bluetoothAdapter.isEnabled()) {
-            bleManage.handleError(BLECode.blutooth_is_closed);
+            bleManage.handleError(-10015);
             return;
         }
         if (!BLESDKLibrary.checkLocationAvailable(BLESDKLibrary.context)) {
-            bleManage.handleError(BLECode.need_location_permission);
+            bleManage.handleError(-10016);
             return;
         }
         if (++currentScanCount > BLEConfig.MAX_SCAN_COUNT) {
@@ -124,7 +123,7 @@ public class BLEScan {
                 bleConnect = new BLEConnect(bleManage.getTargetDeviceAddress(), bleManage);
                 bleConnect.connect();
             } else {
-                bleManage.handleError(BLECode.not_found_device);
+                bleManage.handleError(-10009);
             }
             return;
         }
@@ -146,7 +145,7 @@ public class BLEScan {
             scanControl(true);
         } catch (Exception e) {
             e.printStackTrace();
-            bleManage.handleError(BLECode.on_start_scan_exception);
+            bleManage.handleError(-10012);
         }
     }
 
@@ -163,7 +162,7 @@ public class BLEScan {
     private void scanControl(Boolean scanFlag){
         if(scanFlag){
             if(isScaning){
-                bleManage.handleError(BLECode.scanning);
+                bleManage.handleError(-10017);
                 return;
             }
             isScaning = true;

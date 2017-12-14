@@ -8,7 +8,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
 
-import com.bluetoothle.base.BLECode;
 import com.bluetoothle.base.BLEConfig;
 import com.bluetoothle.core.listener.OnBLEConnectListener;
 import com.bluetoothle.core.listener.OnBLEFindServiceListener;
@@ -417,7 +416,7 @@ public class BLEManage {
     private final Runnable timeoutRunnable = new Runnable() {//超时任务
         @Override
         public void run() {
-            bleResponseManager.onResponseError(listenterObject, BLECode.ble_timeout);
+            bleResponseManager.onResponseError(listenterObject, -10041);
         }
     };
 

@@ -7,7 +7,6 @@ import android.bluetooth.BluetoothGattService;
 import android.os.Handler;
 import android.os.Looper;
 
-import com.bluetoothle.base.BLECode;
 import com.bluetoothle.base.BLESDKLibrary;
 import com.bluetoothle.core.listener.OnBLEOpenNotificationListener;
 import com.bluetoothle.core.manage.BLEManage;
@@ -55,23 +54,23 @@ public class BLEOpenNotification {
             throw new IllegalArgumentException("BLESDKLibrary.context == null");
         }
         if (!BLESDKLibrary.bluetoothAdapter.isEnabled()) {
-            bleManage.handleError(BLECode.blutooth_is_closed);
+            bleManage.handleError(-10015);
             return;
         }
         if(bleManage.getBluetoothGatt() == null){
-            bleManage.handleError(BLECode.on_bluetooth_gatt_empty);
+            bleManage.handleError(-10021);
             return;
         }
         if(bluetoothGattServices == null || bluetoothGattServices.size() == 0){
-            bleManage.handleError(BLECode.empty_ble_service_list);
+            bleManage.handleError(-10023);
             return;
         }
         if(uuids == null || uuids.length != 3){
-            bleManage.handleError(BLECode.on_notification_uuids_validate_failure);
+            bleManage.handleError(-10024);
             return;
         }
         if(bleManage.getBleGattCallback() == null){
-            bleManage.handleError(BLECode.on_bluetooth_gatt_callback_empty);
+            bleManage.handleError(-10022);
             return;
         }
         bleManage.getBleGattCallback().setUuidCharacteristicChange(uuids[1]);
@@ -99,37 +98,37 @@ public class BLEOpenNotification {
             }
         }
         if(bluetoothGattService == null){
-            bleManage.handleError(BLECode.not_found_specified_notification_service_uuid);
+            bleManage.handleError(-10025);
             return;
         }
         final BluetoothGattCharacteristic bluetoothGattCharacteristic = bluetoothGattService.getCharacteristic(uuids[1]);
         if(bluetoothGattCharacteristic == null){
-            bleManage.handleError(BLECode.not_found_specified_notification_characteristics_uuid);
+            bleManage.handleError(-10026);
             return;
         }
         LogUtil.i(TAG, "通知的特征属性：" + bluetoothGattCharacteristic.getProperties() + ",need：" + BluetoothGattCharacteristic.PROPERTY_NOTIFY);
         if ((bluetoothGattCharacteristic.getProperties() & BluetoothGattCharacteristic.PROPERTY_NOTIFY) == 0) {
-            bleManage.handleError(BLECode.not_notification_function);
+            bleManage.handleError(-10027);
             return;
         }
         final BluetoothGattDescriptor bluetoothGattDescriptor = bluetoothGattCharacteristic.getDescriptor(uuids[2]);
         if(bluetoothGattDescriptor == null){
-            bleManage.handleError(BLECode.not_found_specified_notification_characteristics_descriptor);
+            bleManage.handleError(-10028);
             return;
         }
         new Handler(Looper.getMainLooper()).post(new Runnable() {
             @Override
             public void run() {
                 if (!bluetoothGattDescriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE)) {
-                    bleManage.handleError(BLECode.on_bluetooth_gatt_descriptor_set_enable_notification_value_failure);
+                    bleManage.handleError(-10029);
                     return;
                 }
                 if(!bleManage.getBluetoothGatt().setCharacteristicNotification(bluetoothGattCharacteristic, true)){
-                    bleManage.handleError(BLECode.on_bluetooth_gatt_set_characteristics_notification_failure);
+                    bleManage.handleError(-10030);
                     return;
                 }
                 if(!bleManage.getBluetoothGatt().writeDescriptor(bluetoothGattDescriptor)){
-                    bleManage.handleError(BLECode.on_bluetooth_gatt_write_descriptor_failure);
+                    bleManage.handleError(-10031);
                 }
             }
         });

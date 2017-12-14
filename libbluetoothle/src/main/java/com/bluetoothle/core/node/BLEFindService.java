@@ -9,7 +9,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.SystemClock;
 
-import com.bluetoothle.base.BLECode;
 import com.bluetoothle.base.BLEConfig;
 import com.bluetoothle.base.BLESDKLibrary;
 import com.bluetoothle.core.listener.OnBLEFindServiceListener;
@@ -52,15 +51,15 @@ public class BLEFindService {
             throw new IllegalArgumentException("BLESDKLibrary.context == null");
         }
         if(bleManage.getBluetoothGatt() == null){
-            bleManage.handleError(BLECode.on_bluetooth_gatt_empty);
+            bleManage.handleError(-10021);
             return;
         }
         if(bleManage.getBleGattCallback() == null){
-            bleManage.handleError(BLECode.on_bluetooth_gatt_callback_empty);
+            bleManage.handleError(-10022);
             return;
         }
         if (!BLESDKLibrary.bluetoothAdapter.isEnabled()) {
-            bleManage.handleError(BLECode.blutooth_is_closed);
+            bleManage.handleError(-10015);
             return;
         }
         bleManage.getBleGattCallback().registerOnGattBLEFindServiceListener(

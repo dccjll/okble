@@ -12,12 +12,10 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bluetoothle.base.BLECode;
 import com.bluetoothle.base.BLESDKLibrary;
 import com.bluetoothle.util.ByteUtil;
 import com.bluetoothle.util.ScreenUtils;
 import com.bluetoothle.util.ToastUtil;
-import com.bluetoothle.util.log.LogUtil;
 import com.bluetoothle.util.permisstion.PermisstionUtil;
 import com.yunds.bluetoothle.adapter.CommonRVAdapter;
 import com.yunds.bluetoothle.entry.BluetoothDRB;
@@ -93,7 +91,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Scan
     }
 
     private void initLibrary() {
-        BLESDKLibrary.init(getApplication(), true, true, null, null, null);
+        BLESDKLibrary.init(getApplication(), true, true);
     }
 
     private void initPresenter() {

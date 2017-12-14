@@ -2,8 +2,7 @@ package com.bluetoothle.util;
 
 import android.text.TextUtils;
 
-import com.bluetoothle.R;
-import com.bluetoothle.base.BLESDKLibrary;
+import com.bluetoothle.base.BLECode;
 
 import java.util.List;
 
@@ -21,7 +20,7 @@ public class BLEUtil {
      * 验证设备mac地址
      */
     public static String checkDeviceMac(String deviceMac){
-        return BLEUtil.checkAddress(deviceMac) ? null : BLESDKLibrary.context.getString(R.string.please_check_device_mac_or_name);
+        return BLEUtil.checkAddress(deviceMac) ? null : BLECode.parseBLECodeMessage(-10013);
     }
 
     /**

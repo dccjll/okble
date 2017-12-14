@@ -1,50 +1,50 @@
 <resources>
-    <string name="ble_error">phone occur ble error|INFO</string>
-    <string name="scan_device_nearby">scan device nearby|INFO</string>
-    <string name="not_support_ble">your device not support ble|INFO</string>
-    <string name="can_not_get_ble_manager">cannot get ble manager|ERROR</string>
-    <string name="can_not_get_ble_adapter">cannot get ble adapter|ERROR</string>
-    <string name="please_check_device_mac_or_name">please check device name and mac address|INFO</string>
-    <string name="can_not_get_sensor_manager">cannot get sensor manager|ERROR</string>
-    <string name="can_not_get_accelerometer_sensor">cannot get accelerometer sensor|ERROR</string>
-    <string name="device_connected">device connected|INFO</string>
-    <string name="device_disconnected">device disconnected|INFO</string>
-    <string name="on_receive_ble_error_code">received ble error code|ERROR</string>
-    <string name="not_found_device">not found any device nearby,plaese make sure your device is activated and can be found|INFO</string>
-    <string name="the_mac_address_for_dfu_parse_failure">check the mac address for dfu failure|ERROR</string>
-    <string name="on_file_format_exception">check file failure|ERROR</string>
-    <string name="on_start_scan_exception">start scan exception|ERROR</string>
-    <string name="scan_need_location_permission">need location permission for scanning device|INFO</string>
-    <string name="location_permission_forbidden">location permission is forbidden|INFO</string>
-    <string name="blutooth_is_closed">your device ble function is closed, please open it at your device setting center|INFO</string>
-    <string name="need_location_permission">current operating need location permission and function,please allow the app use your device\'s location permission, and try again after opening location function|ERROR</string>
-    <string name="scanning">scanning|INFO</string>
-    <string name="connect_fail_reach_to_max_count">connect failure|INFO</string>
-    <string name="on_bluetooth_device_or_adapter_or_mac_validate_failure">validate device failure|ERROR</string>
-    <string name="already_connect_max_count_device_can_not_connect_more">current device connected\'s num reached the max num|INFO</string>
-    <string name="on_bluetooth_gatt_empty">hava not any connection|INFO</string>
-    <string name="on_bluetooth_gatt_callback_empty">connection state exception|ERROR</string>
-    <string name="empty_ble_service_list">service list is empty|ERROR</string>
-    <string name="on_notification_uuids_validate_failure">validate notification uuid list failure|ERROR</string>
-    <string name="not_found_specified_notification_service_uuid">not found specified notification service uuid|ERROR</string>
-    <string name="not_found_specified_notification_characteristics_uuid">not found specified notification characteristics uuid|ERROR</string>
-    <string name="not_notification_function">specified notification have not notification function|ERROR</string>
-    <string name="not_found_specified_notification_characteristics_descriptor">not found specified notification characteristics descriptor|ERROR</string>
-    <string name="on_bluetooth_gatt_descriptor_set_enable_notification_value_failure">enble notification failure|ERROR</string>
-    <string name="on_bluetooth_gatt_set_characteristics_notification_failure">set characteristics notification failure|ERROR</string>
-    <string name="on_bluetooth_gatt_write_descriptor_failure">write descriptor failure|ERROR</string>
-    <string name="on_write_data_uuids_validate_failure">validate uuid list for writing data failure|ERROR</string>
-    <string name="on_empty_write_data">data to write is null|ERROR</string>
-    <string name="on_data_sub_package_exception">split data to some sub packages failure|ERROR</string>
-    <string name="not_found_specified_write_data_service_uuid">not found specified writing data service uuid|ERROR</string>
-    <string name="not_found_specified_write_data_characteristics_uuid">not found specified writing data characteristics uuid|ERROR</string>
-    <string name="not_write_data_function">specified service hava not writing data function|ERROR</string>
-    <string name="on_bluetooth_gatt_characteristics_set_value_failure">set data to write failure|ERROR</string>
-    <string name="on_bluetooth_gatt_write_characteristics_failure">write data failure|ERROR</string>
-    <string name="ble_timeout">ble timeout|INFO</string>
-    <string name="disconnected_on_timeout_for_disconnect">disconnected for timeout|ERROR</string>
-    <string name="on_ble_uuid_list_validate_failure">validate uuid list failure|ERROR</string>
-    <string name="scan_error">scan exception|INFO</string>
-    <string name="fireware_update_failure">update fireware failure|INFO</string>
-    <string name="please_check_fireware_address">please check the fireware address|ERROR</string>
+    <string-array name="blecode">
+        <item>-10000#Your device not support ble|INFO</item>
+        <item>-10001#Cannot get ble manager|ERROR</item>
+        <item>-10002#Cannot get ble adapter|ERROR</item>
+        <item>-10003#Please check device name and mac address|INFO</item>
+        <item>-10004#Cannot get sensor manager|ERROR</item>
+        <item>-10005#Cannot get accelerometer sensor|ERROR</item>
+        <item>-10006#Device connected|INFO</item>
+        <item>-10007#Device disconnected|INFO</item>
+        <item>-10008#Received ble error code|ERROR</item>
+        <item>-10009#Not found any device nearby,plaese make sure your device is activated and can be found|INFO</item>
+        <item>-10010#Check the mac address for dfu failure|ERROR</item>
+        <item>-10011#Check file failure|ERROR</item>
+        <item>-10012#Start scan exception|ERROR</item>
+        <item>-10013#Need location permission for scanning device|INFO</item>
+        <item>-10014#Location permission is forbidden|INFO</item>
+        <item>-10015#Your device ble function is closed, please open it at your device setting center|INFO</item>
+        <item>-10016#Current operating need location permission and function,please allow the app use your device\'s location permission, and try again after opening location function|INFO</item>
+        <item>-10017#Scanning|INFO</item>
+        <item>-10018#Connect failure|INFO</item>
+        <item>-10019#Validate device failure|ERROR</item>
+        <item>-10020#Current device connected\'s num reached the max num|INFO</item>
+        <item>-10021#Hava not any connection|INFO</item>
+        <item>-10022#Connection state exception|ERROR</item>
+        <item>-10023#Service list is empty|ERROR</item>
+        <item>-10024#Validate notification uuid list failure|ERROR</item>
+        <item>-10025#Not found specified notification service uuid|ERROR</item>
+        <item>-10026#Not found specified notification characteristics uuid|ERROR</item>
+        <item>-10027#Specified notification have not notification function|ERROR</item>
+        <item>-10028#Not found specified notification characteristics descriptor|ERROR</item>
+        <item>-10029#Enble notification failure|ERROR</item>
+        <item>-10030#Set characteristics notification failure|ERROR</item>
+        <item>-10031#Write descriptor failure|ERROR</item>
+        <item>-10032#Validate uuid list for writing data failure|ERROR</item>
+        <item>-10033#Data to write is null|ERROR</item>
+        <item>-10034#Split data to some sub packages failure|ERROR</item>
+        <item>-10035#Not found specified writing data service uuid|ERROR</item>
+        <item>-10036#Not found specified writing data characteristics uuid|ERROR</item>
+        <item>-10037#Specified service hava not writing data function|ERROR</item>
+        <item>-10038#Set data to write failure|ERROR</item>
+        <item>-10039#Write data failure|ERROR</item>
+        <item>-10040#Ble timeout|INFO</item>
+        <item>-10041#Disconnected for timeout|ERROR</item>
+        <item>-10042#Validate uuid list failure|ERROR</item>
+        <item>-10043#Scan exception|INFO</item>
+        <item>-10044#Update fireware failure|INFO</item>
+        <item>-10045#Please check the fireware address|ERROR</item>
+    </string-array>
 </resources>

@@ -5,7 +5,6 @@ import android.bluetooth.BluetoothGattCharacteristic;
 import android.bluetooth.BluetoothGattService;
 import android.os.SystemClock;
 
-import com.bluetoothle.base.BLECode;
 import com.bluetoothle.base.BLEConfig;
 import com.bluetoothle.base.BLESDKLibrary;
 import com.bluetoothle.core.manage.BLEManage;
@@ -73,17 +72,17 @@ public class BLEWriteData {
         dataWrittenState = true;
         if (bleManage.getBluetoothGatt() == null) {
             dataWrittenState = false;
-            bleManage.handleError(BLECode.on_bluetooth_gatt_empty);
+            bleManage.handleError(-10021);
             return;
         }
         if (uuids == null || uuids.length != 2) {
             dataWrittenState = false;
-            bleManage.handleError(BLECode.on_write_data_uuids_validate_failure);
+            bleManage.handleError(-10032);
             return;
         }
         if (data == null || data.length == 0) {
             dataWrittenState = false;
-            bleManage.handleError(BLECode.on_empty_write_data);
+            bleManage.handleError(-10033);
             return;
         }
         dataList = ByteUtil.paeseByteArrayToByteList(data, BLEConfig.MAX_BYTES);
@@ -93,12 +92,12 @@ public class BLEWriteData {
         }
         if (dataList == null) {
             dataWrittenState = false;
-            bleManage.handleError(BLECode.on_data_sub_package_exception);
+            bleManage.handleError(-10034);
             return;
         }
         if (bleManage.getBleGattCallback() == null) {
             dataWrittenState = false;
-            bleManage.handleError(BLECode.on_bluetooth_gatt_callback_empty);
+            bleManage.handleError(-10022);
             return;
         }
         writtenDataLength = 0;
@@ -139,26 +138,26 @@ public class BLEWriteData {
                             bleManage.getBleConnect().connect();
                             return;
                         }
-                        bleManage.handleError(BLECode.on_bluetooth_gatt_write_characteristics_failure);
+                        bleManage.handleError(-10039);
                     }
                 }
         );
         BluetoothGattService bluetoothGattService = bleManage.getBluetoothGatt().getService(uuids[0]);
         if (bluetoothGattService == null) {
             dataWrittenState = false;
-            bleManage.handleError(BLECode.not_found_specified_write_data_service_uuid);
+            bleManage.handleError(-10035);
             return;
         }
         bluetoothGattCharacteristic = bluetoothGattService.getCharacteristic(uuids[1]);
         if (bluetoothGattCharacteristic == null) {
             dataWrittenState = false;
-            bleManage.handleError(BLECode.not_found_specified_write_data_characteristics_uuid);
+            bleManage.handleError(-10036);
             return;
         }
         LogUtil.i(TAG, "写数据的特征属性：" + bluetoothGattCharacteristic.getProperties() + ",need：" + BluetoothGattCharacteristic.PROPERTY_WRITE);
         if ((bluetoothGattCharacteristic.getProperties() & BluetoothGattCharacteristic.PROPERTY_WRITE) == 0) {
             dataWrittenState = false;
-            bleManage.handleError(BLECode.not_write_data_function);
+            bleManage.handleError(-10037);
             return;
         }
         LogUtil.i(TAG, "开始写数据");
@@ -174,12 +173,12 @@ public class BLEWriteData {
     private void sendBLEData(byte[] value) {
         if (!bluetoothGattCharacteristic.setValue(value)) {
             dataWrittenState = false;
-            bleManage.handleError(BLECode.on_bluetooth_gatt_characteristics_set_value_failure);
+            bleManage.handleError(-10038);
             return;
         }
         if (!bleManage.getBluetoothGatt().writeCharacteristic(bluetoothGattCharacteristic)) {
             dataWrittenState = false;
-            bleManage.handleError(BLECode.on_bluetooth_gatt_write_characteristics_failure);
+            bleManage.handleError(-10039);
         }
     }
 }

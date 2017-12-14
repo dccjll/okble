@@ -4,7 +4,6 @@ import android.bluetooth.BluetoothDevice;
 import android.text.TextUtils;
 
 import com.bluetoothle.base.BLECode;
-import com.bluetoothle.base.BLESDKLibrary;
 import com.bluetoothle.core.listener.OnBLEScanListener;
 import com.bluetoothle.core.manage.BLEManage;
 import com.bluetoothle.util.log.LogUtil;
@@ -126,7 +125,7 @@ public class ScanDevice {
                 LogUtil.i(TAG, "扫描结束");
                 synchronized (TAG) {
                     if (!foundDevice) {
-                        onScanFail(BLECode.not_found_device);
+                        onScanFail(-10009);
                     }
                 }
             }

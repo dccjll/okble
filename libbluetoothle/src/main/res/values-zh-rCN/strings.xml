@@ -4,4 +4,6 @@
     <string name="cancel">取消</string>
     <string name="need_camera_permission">需要拍照权限</string>
     <string name="need_sdcard_permission">需要sd卡权限</string>
+    <string name="ble_error">手机蓝牙异常</string>
+    <string name="scan_device_nearby">扫描附近的设备</string>
 </resources>

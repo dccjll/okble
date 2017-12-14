@@ -7,7 +7,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.webkit.MimeTypeMap;
 
-import com.bluetoothle.R;
 import com.bluetoothle.base.BLECode;
 import com.bluetoothle.base.BLESDKLibrary;
 import com.bluetoothle.core.listener.OnBLEScanListener;
@@ -68,7 +67,7 @@ public class DeviceFirewareUpdate {
 
         @Override
         public void onScanFail(final int errorCode) {
-            handleError(deviceMac, Log.ERROR, BLECode.getBLECodeMessage(BLECode.scan_error));
+            handleError(deviceMac, Log.ERROR, BLECode.getBLECodeMessage(-10043));
         }
     };
 
@@ -156,7 +155,7 @@ public class DeviceFirewareUpdate {
             }
             LogUtil.i(TAG, "第" + The_Num_To_Attempt + "次固件更新失败," + message + ",已尝试最大重试次数" + The_Max_Num_To_Attempt + ",不再尝试，固件更新失败");
             DfuServiceListenerHelper.unregisterProgressListener(BLESDKLibrary.context, dfuProgressListener);
-            handleError(deviceAddress, Log.ERROR, BLECode.getBLECodeMessage(BLECode.on_fireware_update_failure));
+            handleError(deviceAddress, Log.ERROR, BLECode.getBLECodeMessage(-10044));
         }
     };
 
@@ -226,12 +225,12 @@ public class DeviceFirewareUpdate {
         }
         if (TextUtils.isEmpty(firewareAddress)) {
             LogUtil.e(TAG, "TextUtils.isEmpty(firewareAddress) false");
-            handleError(deviceMac, Log.INFO, BLESDKLibrary.context.getString(R.string.please_check_fireware_address));
+            handleError(deviceMac, Log.INFO, BLECode.parseBLECodeMessage(-10045));
             return;
         }
         if (!caculateTargetAddress()) {
             LogUtil.e(TAG, "进入固件更新的mac地址转换失败");
-            handleError(deviceMac, Log.ERROR, BLESDKLibrary.context.getString(R.string.the_mac_address_for_dfu_parse_failure));
+            handleError(deviceMac, Log.ERROR, BLECode.parseBLECodeMessage(-10010));
             return;
         }
         bleManage = new BLEManage();
@@ -241,7 +240,7 @@ public class DeviceFirewareUpdate {
             LogUtil.i(TAG, "固件地址指向一个本地地址");
             if (!new File(firewareAddress).exists()) {
                 LogUtil.e(TAG, "固件地址指向一个本地地址，但是该地址不存在任何文件");
-                handleError(deviceMac, Log.INFO, BLESDKLibrary.context.getString(R.string.please_check_fireware_address));
+                handleError(deviceMac, Log.INFO, BLECode.parseBLECodeMessage(-10045));
                 return;
             }
             LogUtil.i(TAG, "固件地址指向一个本地地址，文件存在");
@@ -249,7 +248,7 @@ public class DeviceFirewareUpdate {
             final boolean statusOk = MimeTypeMap.getFileExtensionFromUrl(firewareAddress).matches(extension);
             if (!statusOk) {
                 LogUtil.e(TAG, "文件格式检测失败");
-                handleError(deviceMac, Log.ERROR, BLESDKLibrary.context.getString(R.string.on_file_format_exception));
+                handleError(deviceMac, Log.ERROR, BLECode.parseBLECodeMessage(-10011));
                 return;
             }
             initDFU();
@@ -270,7 +269,7 @@ public class DeviceFirewareUpdate {
                 LogUtil.i(TAG, "文件下载成功，路径为：" + firewareAddress);
                 if (!new File(firewareAddress).exists()) {
                     LogUtil.e(TAG, "固件地址指向一个内部地址，但是该地址不存在任何文件");
-                    handleError(deviceMac, Log.INFO, BLESDKLibrary.context.getString(R.string.please_check_fireware_address));
+                    handleError(deviceMac, Log.INFO, BLECode.parseBLECodeMessage(-10045));
                     return;
                 }
                 LogUtil.i(TAG, "固件地址指向一个内部地址，文件存在");
@@ -278,7 +277,7 @@ public class DeviceFirewareUpdate {
                 final boolean statusOk = MimeTypeMap.getFileExtensionFromUrl(firewareAddress).matches(extension);
                 if (!statusOk) {
                     LogUtil.e(TAG, "文件格式检测失败");
-                    handleError(deviceMac, Log.ERROR, BLESDKLibrary.context.getString(R.string.on_file_format_exception));
+                    handleError(deviceMac, Log.ERROR, BLECode.parseBLECodeMessage(-10011));
                     return;
                 }
                 initDFU();
@@ -287,7 +286,7 @@ public class DeviceFirewareUpdate {
             @Override
             public void onFailure(String msg, int loglever) {
                 LogUtil.e(TAG, msg);
-                handleError(deviceMac, Log.INFO, BLESDKLibrary.context.getString(R.string.please_check_fireware_address));
+                handleError(deviceMac, Log.INFO, BLECode.parseBLECodeMessage(-10045));
             }
         });
     }
@@ -340,7 +339,7 @@ public class DeviceFirewareUpdate {
             e.printStackTrace();
             bleManage.stopScan();
             LogUtil.e(TAG, "开始扫描设备发生异常");
-            handleError(deviceMac, Log.ERROR, BLESDKLibrary.context.getString(R.string.on_start_scan_exception));
+            handleError(deviceMac, Log.ERROR, BLECode.parseBLECodeMessage(-10012));
         }
     }
 

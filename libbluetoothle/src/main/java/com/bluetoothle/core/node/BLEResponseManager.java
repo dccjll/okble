@@ -12,7 +12,6 @@ import android.text.TextUtils;
 
 import com.bluetoothle.base.BLECode;
 import com.bluetoothle.base.BLEConfig;
-import com.bluetoothle.base.BLESDKLibrary;
 import com.bluetoothle.core.listener.OnBLEConnectListener;
 import com.bluetoothle.core.listener.OnBLEFindServiceListener;
 import com.bluetoothle.core.listener.OnBLEOpenNotificationListener;

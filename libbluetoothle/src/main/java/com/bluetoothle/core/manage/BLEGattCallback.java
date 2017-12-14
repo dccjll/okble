@@ -7,8 +7,7 @@ import android.bluetooth.BluetoothGattDescriptor;
 import android.bluetooth.BluetoothProfile;
 import android.util.Log;
 
-import com.bluetoothle.R;
-import com.bluetoothle.base.BLESDKLibrary;
+import com.bluetoothle.base.BLECode;
 import com.bluetoothle.core.listener.OnBLEResponse;
 import com.bluetoothle.core.node.BLEConnect;
 import com.bluetoothle.core.node.BLEFindService;
@@ -104,11 +103,11 @@ public class BLEGattCallback extends BluetoothGattCallback {
                 LogUtil.i(TAG, "正在断开,gatt=" + gatt + ",status=" + status + ",newState=" + newState);
             }else if(newState == BluetoothProfile.STATE_DISCONNECTED){
                 LogUtil.i(TAG, "已断开,gatt=" + gatt + ",status=" + status + ",newState=" + newState);
-                handleError(BLESDKLibrary.context.getString(R.string.device_disconnected), Log.INFO, gatt);
+                handleError(BLECode.parseBLECodeMessage(-10007), Log.INFO, gatt);
             }
         }else{
             LogUtil.e(TAG, "收到蓝牙底层协议栈异常消息,gatt=" + gatt + ",status=" + status + ",newState=" + newState);
-            handleError(BLESDKLibrary.context.getString(R.string.on_receive_ble_error_code), Log.ERROR, gatt);
+            handleError(BLECode.parseBLECodeMessage(-10008), Log.ERROR, gatt);
         }
     }
 

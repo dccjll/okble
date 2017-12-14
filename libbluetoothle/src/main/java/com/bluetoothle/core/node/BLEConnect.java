@@ -9,7 +9,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.SystemClock;
 
-import com.bluetoothle.base.BLECode;
 import com.bluetoothle.base.BLEConfig;
 import com.bluetoothle.base.BLESDKLibrary;
 import com.bluetoothle.core.listener.OnBLEConnectListener;
@@ -91,23 +90,23 @@ public class BLEConnect {
             throw new IllegalArgumentException("BLESDKLibrary.bluetoothAdapter == null");
         }
         if (!BLESDKLibrary.bluetoothAdapter.isEnabled()) {
-            bleManage.handleError(BLECode.blutooth_is_closed);
+            bleManage.handleError(-10015);
             return;
         }
         LogUtil.i(TAG, "bluetoothDevice=" + bluetoothDevice + "\nbluetoothAdapter=" + BLESDKLibrary.bluetoothAdapter + "\ntargetMacAddress=" + targetMacAddress);
         if(++currentConnectCount > BLEConfig.MAX_CONNECT_COUNT){
-            bleManage.handleError(BLECode.connect_fail_reach_to_max_count);
+            bleManage.handleError(-10018);
             return;
         }
         if(bluetoothDevice == null && (BLESDKLibrary.bluetoothAdapter == null || targetMacAddress == null || targetMacAddress.split(":").length != 6)){
-            bleManage.handleError(BLECode.on_bluetooth_device_or_adapter_or_mac_validate_failure);
+            bleManage.handleError(-10019);
             return;
         }
         List<BluetoothDevice> bluetoothDevices = BLESDKLibrary.bluetoothManager.getConnectedDevices(BluetoothProfile.GATT);
         if (bluetoothDevices != null && bluetoothDevices.size() > 0) {
             LogUtil.i(TAG, "有连接的设备列表=" + bluetoothDevices);
             if (bluetoothDevices.size() >= BLEConfig.MaxConnectDeviceNum) {
-                bleManage.handleError(BLECode.already_connect_max_count_device_can_not_connect_more);
+                bleManage.handleError(-10020);
                 return;
             }
             for (BluetoothDevice bluetoothDevice : bluetoothDevices) {

@@ -9,9 +9,9 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.os.Build;
+import android.os.Environment;
 import android.text.TextUtils;
 
-import com.bluetoothle.R;
 import com.bluetoothle.core.manage.BLEService;
 import com.bluetoothle.util.ToastUtil;
 import com.bluetoothle.util.log.LogUtil;
@@ -33,6 +33,13 @@ public class BLESDKLibrary {
     @SuppressLint("StaticFieldLeak")
     public static Context context;
     private static boolean inited = false;//是否已经初始化
+
+    public static synchronized void init(Application application, boolean enableConsoleLog, boolean enableFileLog) {
+        String logPath = Environment.getExternalStorageDirectory() + "/" + application.getPackageName().substring(application.getPackageName().lastIndexOf(".") + 1) + "/Log/";
+        String logFileName = "log.txt";
+        String releaseLogPath = application.getFilesDir() + "data/" + application.getPackageName() + "/cache/Log/";
+        init(application, enableConsoleLog, enableFileLog, logPath, logFileName, releaseLogPath);
+    }
 
     public static synchronized void init(Application application, boolean enableConsoleLog, boolean enableFileLog, String logPath, String logFileName, String releaseLogPath) {
         if (!inited) {//是否已经初始化作同步管理，避免多次被初始化
@@ -57,19 +64,19 @@ public class BLESDKLibrary {
             //判断当前设备是否支持蓝牙ble功能
             hasBLEFeature = application.getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE);
             if(!hasBLEFeature){
-                ToastUtil.showToast(TAG, BLESDKLibrary.context.getString(R.string.not_support_ble), "hasBLEFeature == false");
+                ToastUtil.showToast(TAG, BLECode.parseBLECodeMessage(-10000), "hasBLEFeature == false");
                 return;
             }
             //获取蓝牙管理服务
             bluetoothManager = (BluetoothManager) application.getSystemService(Context.BLUETOOTH_SERVICE);
             if(bluetoothManager == null){
-                ToastUtil.showToast(TAG, BLESDKLibrary.context.getString(R.string.can_not_get_ble_manager), "bluetoothManager == false");
+                ToastUtil.showToast(TAG, BLECode.parseBLECodeMessage(-10001), "bluetoothManager == false");
                 return;
             }
             //获得蓝牙适配器
             bluetoothAdapter = bluetoothManager.getAdapter();
             if(bluetoothAdapter == null){
-                ToastUtil.showToast(TAG, BLESDKLibrary.context.getString(R.string.can_not_get_ble_adapter), "bluetoothAdapter == false");
+                ToastUtil.showToast(TAG, BLECode.parseBLECodeMessage(-10002), "bluetoothAdapter == false");
                 return;
             }
             //启动蓝牙环境服务，该服务只是一个无限循环的触发器，每隔几秒钟触发一次检测，根据条件决定是否删除过期缓存的蓝牙连接对象
