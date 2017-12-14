@@ -1,12 +1,13 @@
 <resources>
     <string-array name="blecode">
+        <item>10000#Device connected|INFO</item>
         <item>-10000#Your device not support ble|INFO</item>
         <item>-10001#Cannot get ble manager|ERROR</item>
         <item>-10002#Cannot get ble adapter|ERROR</item>
         <item>-10003#Please check device name and mac address|INFO</item>
         <item>-10004#Cannot get sensor manager|ERROR</item>
         <item>-10005#Cannot get accelerometer sensor|ERROR</item>
-        <item>-10006#Device connected|INFO</item>
+        <item>-10006#Network exception|INFO</item>
         <item>-10007#Device disconnected|INFO</item>
         <item>-10008#Received ble error code|ERROR</item>
         <item>-10009#Not found any device nearby,plaese make sure your device is activated and can be found|INFO</item>

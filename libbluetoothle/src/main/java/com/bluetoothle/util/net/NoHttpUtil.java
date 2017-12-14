@@ -9,7 +9,7 @@ import android.os.Looper;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.bluetoothle.R;
+import com.bluetoothle.base.BLECode;
 import com.bluetoothle.util.log.LogUtil;
 import com.yolanda.nohttp.FileBinary;
 import com.yolanda.nohttp.Headers;
@@ -135,7 +135,7 @@ public class NoHttpUtil {
      */
     public void sendImageRequest(String url, final CommonResponseListener listener) {
         if (!checkNetworkAvailable(context)) {
-            listener.onFinish(false, null, Log.INFO, context.getString(R.string.network_error));
+            listener.onFinish(false, null, Log.INFO, BLECode.parseBLECodeMessage(-10006));
             return;
         }
         Request<Bitmap> request = NoHttp.createImageRequest(url, RequestMethod.GET);
@@ -163,7 +163,7 @@ public class NoHttpUtil {
             @Override
             public void onFailed(int what, Response<Bitmap> response) {
                 LogUtil.e(TAG, "url=" + response.request().url() + "\nerror=" + response.get());
-                listener.onFinish(false, null, Log.WARN, context.getString(R.string.network_error));
+                listener.onFinish(false, null, Log.WARN, BLECode.parseBLECodeMessage(-10006));
             }
 
             @Override
@@ -178,7 +178,7 @@ public class NoHttpUtil {
      */
     public void uploadFile(final String url, Map<String, String> postMap, String fileKey, File postFile, final CommonResponseListener listener) {
         if (!checkNetworkAvailable(context)) {
-            listener.onFinish(false, null, Log.INFO, context.getString(R.string.network_error));
+            listener.onFinish(false, null, Log.INFO, BLECode.parseBLECodeMessage(-10006));
             return;
         }
         Request<String> request = NoHttp.createStringRequest(url, RequestMethod.POST);
@@ -207,7 +207,7 @@ public class NoHttpUtil {
                     }
                 } catch (JSONException e) {
                     LogUtil.e(TAG, "url=" + response.request().url() + "\nerror=" + e.getMessage());
-                    listener.onFinish(false, null, Log.WARN, context.getString(R.string.network_error));
+                    listener.onFinish(false, null, Log.WARN, BLECode.parseBLECodeMessage(-10006));
                 }
 
             }
@@ -215,7 +215,7 @@ public class NoHttpUtil {
             @Override
             public void onFailed(int what, Response<String> response) {
                 LogUtil.e(TAG, "url=" + response.request().url() + "\nerror=" + response.get());
-                listener.onFinish(false, null, Log.WARN, context.getString(R.string.network_error));
+                listener.onFinish(false, null, Log.WARN, BLECode.parseBLECodeMessage(-10006));
             }
 
             @Override
@@ -232,7 +232,7 @@ public class NoHttpUtil {
      */
     public void download(String url, String fileFolder, String filename, final DownloadResponseListener listener) {
         if (!checkNetworkAvailable(context)) {
-            listener.onFailure(context.getString(R.string.network_error), Log.INFO);
+            listener.onFailure(BLECode.parseBLECodeMessage(-10006), Log.INFO);
             return;
         }
         DownloadRequest request = NoHttp.createDownloadRequest(url, RequestMethod.GET, fileFolder, filename, true, true);
@@ -311,7 +311,7 @@ public class NoHttpUtil {
      */
     private void asyncPostStringRequest(String url, int what,Map<String, String> header, Map<String, String> map, CommonResponseListener listener, boolean encryptFlag) {
         if (!checkNetworkAvailable(context)) {
-            listener.onFinish(false, null, Log.INFO, context.getString(R.string.network_error));
+            listener.onFinish(false, null, Log.INFO, BLECode.parseBLECodeMessage(-10006));
             return;
         }
         // 取消队列中已开始的请求
@@ -380,7 +380,7 @@ public class NoHttpUtil {
             int responseCode = response.getHeaders().getResponseCode();
             if (responseCode > 400) {
                 LogUtil.e(TAG, "responseCode > 400\nresponseCode=" + responseCode + "\nurl=" + response.request().url());
-                onFinish(false, null, Log.WARN, context.getString(R.string.network_error));
+                onFinish(false, null, Log.WARN, BLECode.parseBLECodeMessage(-10006));
                 return;
             }
             String resultString;
@@ -410,7 +410,7 @@ public class NoHttpUtil {
             } catch (JSONException e) {
                 e.printStackTrace();
                 LogUtil.e(TAG, "url=" + response.request().url() + " ,error=" + e.getMessage());
-                onFinish(false, null, Log.WARN, context.getString(R.string.network_error));
+                onFinish(false, null, Log.WARN, BLECode.parseBLECodeMessage(-10006));
             }
         }
 
@@ -420,26 +420,26 @@ public class NoHttpUtil {
             exception.printStackTrace();
             String errorMsg;
             if (exception instanceof NetworkError) {// 网络不好
-                errorMsg = context.getString(R.string.network_error);
+                errorMsg = BLECode.parseBLECodeMessage(-10006);
                 LogUtil.e(TAG, "nohttp_network_error");
             } else if (exception instanceof TimeoutError) {// 请求超时
-                errorMsg = context.getString(R.string.network_error);
+                errorMsg = BLECode.parseBLECodeMessage(-10006);
                 LogUtil.e(TAG, "nohttp_timeout_error");
             } else if (exception instanceof UnKnownHostError) {// 找不到服务器
-                errorMsg = context.getString(R.string.network_error);
+                errorMsg = BLECode.parseBLECodeMessage(-10006);
                 LogUtil.e(TAG, "nohttp_unknownhost_error");
             } else if (exception instanceof URLError) {// URL是错的
-                errorMsg = context.getString(R.string.network_error);
+                errorMsg = BLECode.parseBLECodeMessage(-10006);
                 LogUtil.e(TAG, "nohttp_url_error");
             } else if (exception instanceof NotFoundCacheError) {
                 // 这个异常只会在仅仅查找缓存时没有找到缓存时返回
-                errorMsg = context.getString(R.string.network_error);
+                errorMsg = BLECode.parseBLECodeMessage(-10006);
                 LogUtil.e(TAG, "nohttp_notfoundcache_error");
             } else if (exception instanceof ProtocolException) {
-                errorMsg = context.getString(R.string.network_error);
+                errorMsg = BLECode.parseBLECodeMessage(-10006);
                 LogUtil.e(TAG, "nohttp_protocol_error");
             } else {
-                errorMsg = context.getString(R.string.network_error);
+                errorMsg = BLECode.parseBLECodeMessage(-10006);
                 LogUtil.e(TAG, "nohttp_unknown_error");
             }
             onFinish(false, null, Log.WARN, errorMsg);
