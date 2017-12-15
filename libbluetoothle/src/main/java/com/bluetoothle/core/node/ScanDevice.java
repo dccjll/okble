@@ -132,7 +132,7 @@ public class ScanDevice {
 
             @Override
             public void onScanFail(int errorCode) {
-                LogUtil.i(TAG, BLECode.getBLECodeMessage(errorCode));
+                LogUtil.i(TAG, BLECode.parseBLECodeMessage(errorCode));
                 if (onBLEScanListener != null) {
                     onBLEScanListener.onScanFail(errorCode);
                 }

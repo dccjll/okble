@@ -4,7 +4,6 @@ import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 
 import com.bluetoothle.base.BLECode;
-import com.bluetoothle.base.BLESDKLibrary;
 import com.bluetoothle.core.listener.OnBLEScanListener;
 import com.bluetoothle.core.manage.BLEManage;
 import com.bluetoothle.util.permisstion.OnPermissionResult;
@@ -45,7 +44,7 @@ public class ScanDeviceImpl implements ScanDevice {
         @Override
         public void onScanFail(int errorCode) {
             stopScan();
-            scanDeviceView.onScanFailure(BLECode.getBLECodeMessage(errorCode));
+            scanDeviceView.onScanFailure(BLECode.parseBLECodeMessage(errorCode));
         }
     };
 

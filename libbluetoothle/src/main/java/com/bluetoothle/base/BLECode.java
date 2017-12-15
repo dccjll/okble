@@ -4,7 +4,6 @@ import android.util.Log;
 import android.util.SparseArray;
 
 import com.bluetoothle.R;
-import com.bluetoothle.util.log.LogUtil;
 
 /**
  * 作者：dccjll<br>
@@ -41,25 +40,6 @@ public class BLECode {
             e.printStackTrace();
         }
         return originBleMsg;
-    }
-
-    /**
-     * 过滤转换的消息码
-     */
-    public static String getBLECodeMessage(int bleCode) {
-        String bleString = codeMap.get(bleCode);
-        try {
-            bleString = parseBLECodeMessage(bleCode);
-            int bleLogLevel = getBLECodeMessageLevel(bleCode);
-            LogUtil.i(TAG, "Befor pass,getBLECodeMessage, msg=" + bleString + ",level=" + getBLECodeMessageLevelMessage(bleCode));
-            if (bleLogLevel > Log.INFO) {
-                bleString = BLESDKLibrary.context.getString(R.string.system_error);
-            }
-            LogUtil.i(TAG, "After pass,getBLECodeMessage, msg=" + bleString + ",level=" + getBLECodeMessageLevelMessage(bleCode));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return bleString;
     }
 
     /**

@@ -47,5 +47,7 @@
         <item>-10043#扫描异常|INFO</item>
         <item>-10044#固件更新失败|INFO</item>
         <item>-10045#请检查固件地址|ERROR</item>
+        <item>-10046#下载固件失败|ERROR</item>
+        <item>-10047#固件地址指向一个内部地址，但是该地址不存在任何文件|ERROR</item>
     </string-array>
 </resources>

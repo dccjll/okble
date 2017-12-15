@@ -36,8 +36,7 @@ public interface OnCommonDfuProgressListener {
     /**
      * 更新失败
      * @param deviceAddress 设备mac地址
-     * @param loglevel         异常消息
-     * @param error       消息描述
+     * @param errorCode 错误码
      */
-    void onError(final String deviceAddress, final int loglevel, final String error);
+    void onError(final String deviceAddress, final int errorCode);
 }

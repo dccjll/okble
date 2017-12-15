@@ -165,7 +165,7 @@ public class BLEResponseManager {
             LogUtil.e(TAG, "onResponseError，任务已结束");
             return;
         }
-        LogUtil.e(TAG, "onResponseError\nobjectListener=" + objectListener + "\nerrorMsg=" + BLECode.getBLECodeMessage(errorCode));
+        LogUtil.e(TAG, "onResponseError\nobjectListener=" + objectListener + "\nerrorMsg=" + BLECode.parseBLECodeMessage(errorCode));
         setTaskFinishFlag(false);
         new Handler(Looper.getMainLooper()).post(new Runnable() {
             @Override
