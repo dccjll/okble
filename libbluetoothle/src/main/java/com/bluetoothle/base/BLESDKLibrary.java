@@ -16,6 +16,8 @@ import com.dsm.platform.DsmLibrary;
 import com.dsm.platform.util.ToastUtil;
 import com.dsm.platform.util.log.LogUtil;
 
+import net.tsz.afinal.FinalDb;
+
 /**
  * 作者：dccjll<br>
  * 创建时间：2017/11/6 11:25<br>
@@ -36,16 +38,16 @@ public class BLESDKLibrary {
         String logPath = Environment.getExternalStorageDirectory() + "/" + application.getPackageName().substring(application.getPackageName().lastIndexOf(".") + 1) + "/Log/";
         String logFileName = "log.txt";
         String releaseLogPath = application.getFilesDir() + "data/" + application.getPackageName() + "/cache/Log/";
-        init(application, enableConsoleLog, enableFileLog, logPath, logFileName, releaseLogPath);
+        init(application, null, enableConsoleLog, enableFileLog, logPath, logFileName, releaseLogPath);
     }
 
-    public static synchronized void init(Application application, boolean enableConsoleLog, boolean enableFileLog, String logPath, String logFileName, String releaseLogPath) {
+    public static synchronized void init(Application application, FinalDb finalDb, boolean enableConsoleLog, boolean enableFileLog, String logPath, String logFileName, String releaseLogPath) {
         if (!inited) {//是否已经初始化作同步管理，避免多次被初始化
             if (application == null) {
                 throw new IllegalArgumentException("context == null");
             }
             inited = true;
-            DsmLibrary.getInstance().init(application,null,enableConsoleLog, enableFileLog, logPath, logFileName, releaseLogPath);
+            DsmLibrary.getInstance().init(application,finalDb,enableConsoleLog, enableFileLog, logPath, logFileName, releaseLogPath);
             context = application.getApplicationContext();
             new BLEMsgCode();
             //初始化Base库
