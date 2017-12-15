@@ -6,7 +6,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
-import com.bluetoothle.util.log.LogUtil;
+import com.dsm.platform.util.log.LogUtil;
 
 /**
  * 作者：dccjll<br>

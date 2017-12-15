@@ -3,11 +3,11 @@ package com.yunds.bluetoothle.presenter.scan;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 
-import com.bluetoothle.base.BLECode;
+import com.bluetoothle.base.BLEMsgCode;
 import com.bluetoothle.core.listener.OnBLEScanListener;
 import com.bluetoothle.core.manage.BLEManage;
-import com.bluetoothle.util.permisstion.OnPermissionResult;
-import com.bluetoothle.util.permisstion.PermisstionUtil;
+import com.dsm.platform.listener.OnPermissionResult;
+import com.dsm.platform.util.PermisstionUtil;
 import com.yunds.bluetoothle.R;
 import com.yunds.bluetoothle.entry.BluetoothDRB;
 
@@ -44,7 +44,7 @@ public class ScanDeviceImpl implements ScanDevice {
         @Override
         public void onScanFail(int errorCode) {
             stopScan();
-            scanDeviceView.onScanFailure(BLECode.parseBLECodeMessage(errorCode));
+            scanDeviceView.onScanFailure(BLEMsgCode.parseBLECodeMessage(errorCode));
         }
     };
 

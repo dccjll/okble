@@ -12,13 +12,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bluetoothle.R;
-import com.bluetoothle.base.BLECode;
-import com.bluetoothle.base.CommonRVAdapter;
+import com.bluetoothle.base.BLEMsgCode;
 import com.bluetoothle.core.listener.OnBLEScanListener;
 import com.bluetoothle.core.node.ScanDevice;
-import com.bluetoothle.util.ToastUtil;
-import com.bluetoothle.util.permisstion.OnPermissionResult;
-import com.bluetoothle.util.permisstion.PermisstionUtil;
+import com.dsm.platform.base.adapter.CommonRVAdapter;
+import com.dsm.platform.listener.OnPermissionResult;
+import com.dsm.platform.util.PermisstionUtil;
+import com.dsm.platform.util.ToastUtil;
 
 import java.util.List;
 import java.util.Map;
@@ -51,7 +51,7 @@ public class ScanDeviceActivity extends Activity {
             bleDeviceType = intent.getIntExtra("bleDeviceType", 0);
             deviceNameStartWith = intent.getStringExtra("deviceNameStartWith");
         }
-        PermisstionUtil.requestBLELocationPermission(this, BLECode.parseBLECodeMessage(-10013), new OnPermissionResult() {
+        PermisstionUtil.requestBLELocationPermission(this, BLEMsgCode.parseBLECodeMessage(-10013), new OnPermissionResult() {
             @Override
             public void granted(int requestCode) {
                 initRvList();
@@ -60,7 +60,7 @@ public class ScanDeviceActivity extends Activity {
 
             @Override
             public void denied(int requestCode) {
-                Toast.makeText(ScanDeviceActivity.this, BLECode.parseBLECodeMessage(-10013), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ScanDeviceActivity.this, BLEMsgCode.parseBLECodeMessage(-10013), Toast.LENGTH_SHORT).show();
                 finish();
             }
         });
@@ -85,7 +85,7 @@ public class ScanDeviceActivity extends Activity {
         commonRVAdapter = new CommonRVAdapter<BluetoothDevice>(this, null, android.R.layout.simple_list_item_2, android.R.layout.simple_list_item_1) {
             @Override
             public void onBindNullDataViewHolder(RecyclerView.Adapter adapter, RVViewHolder rvViewHolder, int position, BluetoothDevice entry, List<BluetoothDevice> data) {
-                ((TextView)rvViewHolder.findViewById(android.R.id.text1)).setText(BLECode.parseBLECodeMessage(-10009));
+                ((TextView)rvViewHolder.findViewById(android.R.id.text1)).setText(BLEMsgCode.parseBLECodeMessage(-10009));
             }
 
             @Override
@@ -127,7 +127,7 @@ public class ScanDeviceActivity extends Activity {
 
             @Override
             public void onScanFail(int errorCode) {
-                ToastUtil.showToastLong(BLECode.parseBLECodeMessage(errorCode));
+                ToastUtil.showToastLong(BLEMsgCode.parseBLECodeMessage(errorCode));
             }
         }).startScan();
     }

@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.os.IBinder;
 
 import com.bluetoothle.base.BLEConfig;
-import com.bluetoothle.util.log.LogUtil;
+import com.dsm.platform.util.log.LogUtil;
 
 import java.util.Map;
 

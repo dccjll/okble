@@ -13,7 +13,7 @@ import com.bluetoothle.base.BLEConfig;
 import com.bluetoothle.base.BLESDKLibrary;
 import com.bluetoothle.core.listener.OnBLEFindServiceListener;
 import com.bluetoothle.core.manage.BLEManage;
-import com.bluetoothle.util.log.LogUtil;
+import com.dsm.platform.util.log.LogUtil;
 
 import java.util.List;
 

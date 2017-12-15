@@ -10,8 +10,8 @@ import android.os.Looper;
 import android.os.SystemClock;
 import android.text.TextUtils;
 
-import com.bluetoothle.base.BLECode;
 import com.bluetoothle.base.BLEConfig;
+import com.bluetoothle.base.BLEMsgCode;
 import com.bluetoothle.core.listener.OnBLEConnectListener;
 import com.bluetoothle.core.listener.OnBLEFindServiceListener;
 import com.bluetoothle.core.listener.OnBLEOpenNotificationListener;
@@ -20,7 +20,7 @@ import com.bluetoothle.core.listener.OnBLEScanListener;
 import com.bluetoothle.core.listener.OnBLEWriteDataListener;
 import com.bluetoothle.core.manage.BLEGattCallback;
 import com.bluetoothle.core.manage.BLEManage;
-import com.bluetoothle.util.log.LogUtil;
+import com.dsm.platform.util.log.LogUtil;
 
 import java.util.List;
 import java.util.Map;
@@ -165,7 +165,7 @@ public class BLEResponseManager {
             LogUtil.e(TAG, "onResponseError，任务已结束");
             return;
         }
-        LogUtil.e(TAG, "onResponseError\nobjectListener=" + objectListener + "\nerrorMsg=" + BLECode.parseBLECodeMessage(errorCode));
+        LogUtil.e(TAG, "onResponseError\nobjectListener=" + objectListener + "\nerrorMsg=" + BLEMsgCode.parseBLECodeMessage(errorCode));
         setTaskFinishFlag(false);
         new Handler(Looper.getMainLooper()).post(new Runnable() {
             @Override

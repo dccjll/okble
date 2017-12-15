@@ -10,13 +10,11 @@ import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Environment;
-import android.text.TextUtils;
 
 import com.bluetoothle.core.manage.BLEService;
-import com.bluetoothle.util.ToastUtil;
-import com.bluetoothle.util.log.LogUtil;
-import com.yolanda.nohttp.NoHttp;
-
+import com.dsm.platform.DsmLibrary;
+import com.dsm.platform.util.ToastUtil;
+import com.dsm.platform.util.log.LogUtil;
 
 /**
  * 作者：dccjll<br>
@@ -47,36 +45,27 @@ public class BLESDKLibrary {
                 throw new IllegalArgumentException("context == null");
             }
             inited = true;
-//            DsmLibrary.getInstance().init(application,finalDb,enableConsoleLog, enableFileLog, logPath, logFileName, releaseLogPath);
-            //初始化网络请求框架
-            NoHttp.initialize(application);
-            LogUtil.LOG_SWITCH = enableConsoleLog;//日志开关
-            LogUtil.LOG_WRITE_TO_FILE = enableFileLog;//日志写入SD卡文件开关，若为false则将日志写入应用程序内部私有空间
-            LogUtil.LOG_FILEPATH = logPath;//输出的日志在sd卡上的存储路径
-            if (!TextUtils.isEmpty(logFileName)) {
-                LogUtil.LOG_FILENAME = logFileName;//日志文件的名称
-            }
-            LogUtil.LOG_FILEPATH_RELEASE = releaseLogPath;//输出的日志在应用程序内部私有空间的存储路径
-            LogUtil.delFile();
+            DsmLibrary.getInstance().init(application,null,enableConsoleLog, enableFileLog, logPath, logFileName, releaseLogPath);
             context = application.getApplicationContext();
+            new BLEMsgCode();
             //初始化Base库
             //        LibraryInit.init(BLESDKLibrary.context);
             //判断当前设备是否支持蓝牙ble功能
             hasBLEFeature = application.getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE);
             if(!hasBLEFeature){
-                ToastUtil.showToast(TAG, BLECode.parseBLECodeMessage(-10000), "hasBLEFeature == false");
+                ToastUtil.showToast(TAG, BLEMsgCode.parseBLECodeMessage(-10000), "hasBLEFeature == false");
                 return;
             }
             //获取蓝牙管理服务
             bluetoothManager = (BluetoothManager) application.getSystemService(Context.BLUETOOTH_SERVICE);
             if(bluetoothManager == null){
-                ToastUtil.showToast(TAG, BLECode.parseBLECodeMessage(-10001), "bluetoothManager == false");
+                ToastUtil.showToast(TAG, BLEMsgCode.parseBLECodeMessage(-10001), "bluetoothManager == false");
                 return;
             }
             //获得蓝牙适配器
             bluetoothAdapter = bluetoothManager.getAdapter();
             if(bluetoothAdapter == null){
-                ToastUtil.showToast(TAG, BLECode.parseBLECodeMessage(-10002), "bluetoothAdapter == false");
+                ToastUtil.showToast(TAG, BLEMsgCode.parseBLECodeMessage(-10002), "bluetoothAdapter == false");
                 return;
             }
             //启动蓝牙环境服务，该服务只是一个无限循环的触发器，每隔几秒钟触发一次检测，根据条件决定是否删除过期缓存的蓝牙连接对象

@@ -6,17 +6,17 @@ import android.os.Looper;
 import android.text.TextUtils;
 import android.webkit.MimeTypeMap;
 
-import com.bluetoothle.base.BLECode;
+import com.bluetoothle.base.BLEMsgCode;
 import com.bluetoothle.base.BLESDKLibrary;
 import com.bluetoothle.core.listener.OnBLEScanListener;
 import com.bluetoothle.core.manage.BLEManage;
 import com.bluetoothle.dfu.listener.OnInputFirewareUpdateModeListener;
 import com.bluetoothle.dfu.listener.OnSimpleDfuProgressListener;
 import com.bluetoothle.util.BLEUtil;
-import com.bluetoothle.util.log.FileUtil;
-import com.bluetoothle.util.log.LogUtil;
-import com.bluetoothle.util.net.NoHttpUtil;
-import com.bluetoothle.util.net.ServerUtil;
+import com.dsm.platform.base.ServerUtil;
+import com.dsm.platform.util.log.FileUtil;
+import com.dsm.platform.util.log.LogUtil;
+import com.dsm.platform.util.net.NoHttpUtil;
 
 import java.io.File;
 import java.util.List;
@@ -283,9 +283,9 @@ public class DeviceFirewareUpdate {
             }
 
             @Override
-            public void onFailure(String msg, int loglever) {
-                LogUtil.e(TAG, msg);
-                handleError(deviceMac, -10046);
+            public void onFailure(Integer integer) {
+                LogUtil.e(TAG, BLEMsgCode.parseBLECodeMessage(integer));
+                handleError(deviceMac, integer);
             }
         });
     }
@@ -380,7 +380,7 @@ public class DeviceFirewareUpdate {
      * 处理异常
      */
     private  void handleError(final String deviceMac, final int errorCode) {
-        LogUtil.e(TAG, BLECode.parseBLECodeMessage(errorCode));
+        LogUtil.e(TAG, BLEMsgCode.parseBLECodeMessage(errorCode));
         if (new File(firewareAddress).exists()) {
             FileUtil.deleteFile(firewareAddress);
         }

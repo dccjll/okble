@@ -3,10 +3,10 @@ package com.bluetoothle.core.node;
 import android.bluetooth.BluetoothDevice;
 import android.text.TextUtils;
 
-import com.bluetoothle.base.BLECode;
+import com.bluetoothle.base.BLEMsgCode;
 import com.bluetoothle.core.listener.OnBLEScanListener;
 import com.bluetoothle.core.manage.BLEManage;
-import com.bluetoothle.util.log.LogUtil;
+import com.dsm.platform.util.log.LogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -132,7 +132,7 @@ public class ScanDevice {
 
             @Override
             public void onScanFail(int errorCode) {
-                LogUtil.i(TAG, BLECode.parseBLECodeMessage(errorCode));
+                LogUtil.i(TAG, BLEMsgCode.parseBLECodeMessage(errorCode));
                 if (onBLEScanListener != null) {
                     onBLEScanListener.onScanFail(errorCode);
                 }

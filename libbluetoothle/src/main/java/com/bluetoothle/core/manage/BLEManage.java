@@ -20,7 +20,7 @@ import com.bluetoothle.core.node.BLEResponseManager;
 import com.bluetoothle.core.node.BLEScan;
 import com.bluetoothle.core.node.BLEWriteData;
 import com.bluetoothle.util.BLEUtil;
-import com.bluetoothle.util.log.LogUtil;
+import com.dsm.platform.util.log.LogUtil;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;

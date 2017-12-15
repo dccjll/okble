@@ -13,10 +13,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bluetoothle.base.BLESDKLibrary;
-import com.bluetoothle.util.ByteUtil;
-import com.bluetoothle.util.ScreenUtils;
-import com.bluetoothle.util.ToastUtil;
-import com.bluetoothle.util.permisstion.PermisstionUtil;
+import com.dsm.platform.util.ByteUtil;
+import com.dsm.platform.util.PermisstionUtil;
+import com.dsm.platform.util.ScreenUtils;
+import com.dsm.platform.util.ToastUtil;
 import com.yunds.bluetoothle.adapter.CommonRVAdapter;
 import com.yunds.bluetoothle.entry.BluetoothDRB;
 import com.yunds.bluetoothle.presenter.scan.ScanDevice;
